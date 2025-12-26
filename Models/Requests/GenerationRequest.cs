@@ -97,6 +97,33 @@ public class GenerationRequest
 
     /// <summary>When true, zeroes the negative prompt if empty. May yield better quality on SD3.</summary>
     public bool? ZeroNegative { get; set; }
+
+    #region API Backend Extension
+    // NOTE:
+    // The parameters below apply ONLY to Flux models when accessed via Swarm
+    // using the Hartsy API Backends extension.
+
+    /// <summary>BFL content moderation level. 0 = strictest, 5 = most permissive. Default: 2.</summary>
+    public int? SafetyTolerance { get; set; }
+
+    /// <summary>BFL output image format. jpeg or png.</summary>
+    public string? OutputFormat { get; set; }
+
+    /// <summary>BFL Guidance scale for FLUX.2 [flex]. Controls how closely the output follows the prompt. Range: 1.5-10, default: 4.5.</summary>
+    public float? Guidance { get; set; }
+
+    /// <summary>Whether to use prompt upsampling for BFL models.</summary>
+    public bool? PromptUpsampling { get; set; }
+
+    /// <summary>Webhook URL for BFL API notifications.</summary>
+    public string? WebhookUrl { get; set; }
+
+    /// <summary>Webhook secret for BFL API notifications.</summary>
+    public string? WebhookSecret { get; set; }
+
+    /// <summary>Aspect ratio for BFL models (e.g., "1:1", "16:9").</summary>
+    public string? AspectRatio { get; set; }
+    #endregion
 }
 
 /// <summary>Represents a LoRA (Low-Rank Adaptation) model to apply during generation.</summary>
