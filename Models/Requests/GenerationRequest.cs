@@ -159,6 +159,58 @@ public class GenerationRequest
     [Newtonsoft.Json.JsonProperty("openai_n")]
     public int? OpenAIN { get; set; }
     #endregion
+
+    #region Ideogram API Parameters
+    // NOTE:
+    // The parameters below apply ONLY to Ideogram models (V1, V1-Turbo, V2, V2-Turbo, V2a, V2a-Turbo, V3)
+    // when accessed via SwarmUI using the API Backends extension.
+
+    /// <summary>Ideogram resolution preset for V3 models (e.g., "1024x1024", "1024x768").
+    /// Cannot be used in conjunction with aspect_ratio.</summary>
+    [Newtonsoft.Json.JsonProperty("ideogram_resolution")]
+    public string? IdeogramResolution { get; set; }
+
+    /// <summary>Ideogram aspect ratio (e.g., "1:1", "16:9", "4:3").
+    /// Cannot be used in conjunction with resolution. Defaults to 1:1.</summary>
+    [Newtonsoft.Json.JsonProperty("ideogram_aspect_ratio")]
+    public string? IdeogramAspectRatio { get; set; }
+
+    /// <summary>Ideogram rendering speed for V3: DEFAULT, TURBO, QUALITY.</summary>
+    [Newtonsoft.Json.JsonProperty("ideogram_rendering_speed")]
+    public string? IdeogramRenderingSpeed { get; set; }
+
+    /// <summary>Ideogram MagicPrompt mode: AUTO, ON, OFF.
+    /// Determines if MagicPrompt should be used in generating the request.</summary>
+    [Newtonsoft.Json.JsonProperty("ideogram_magic_prompt")]
+    public string? IdeogramMagicPrompt { get; set; }
+
+    /// <summary>Ideogram negative prompt - description of what to exclude from the image.</summary>
+    [Newtonsoft.Json.JsonProperty("ideogram_negative_prompt")]
+    public string? IdeogramNegativePrompt { get; set; }
+
+    /// <summary>Ideogram number of images to generate (1-8). Defaults to 1.</summary>
+    [Newtonsoft.Json.JsonProperty("ideogram_num_images")]
+    public int? IdeogramNumImages { get; set; }
+
+    /// <summary>Ideogram color palette preset name (e.g., "EMBER", "FRESH", "JUNGLE").
+    /// Not supported by V1, V1-Turbo, V2a, V2a-Turbo models.</summary>
+    [Newtonsoft.Json.JsonProperty("ideogram_color_palette")]
+    public string? IdeogramColorPalette { get; set; }
+
+    /// <summary>Ideogram style codes - list of 8-character hexadecimal codes.
+    /// Cannot be used with style_reference_images or style_type.</summary>
+    [Newtonsoft.Json.JsonProperty("ideogram_style_codes")]
+    public List<string>? IdeogramStyleCodes { get; set; }
+
+    /// <summary>Ideogram style type: GENERAL, REALISTIC, DESIGN, RENDER_3D, ANIME.
+    /// Defaults to GENERAL.</summary>
+    [Newtonsoft.Json.JsonProperty("ideogram_style_type")]
+    public string? IdeogramStyleType { get; set; }
+
+    /// <summary>Ideogram style preset - predefined artistic style for V3 models.</summary>
+    [Newtonsoft.Json.JsonProperty("ideogram_style_preset")]
+    public string? IdeogramStylePreset { get; set; }
+    #endregion
 }
 
 /// <summary>Represents a LoRA (Low-Rank Adaptation) model to apply during generation.</summary>
