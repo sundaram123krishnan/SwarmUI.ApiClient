@@ -211,6 +211,44 @@ public class GenerationRequest
     [Newtonsoft.Json.JsonProperty("ideogram_style_preset")]
     public string? IdeogramStylePreset { get; set; }
     #endregion
+
+    #region Google API Parameters
+    // NOTE:
+    // The parameters below apply ONLY to Google models (Gemini, Imagen)
+    // when accessed via SwarmUI using the API Backends extension.
+
+    /// <summary>Google Gemini response modalities. Valid values: IMAGE, TEXT.</summary>
+    [Newtonsoft.Json.JsonProperty("google_gemini_response_modalities")]
+    public string? GoogleGeminiResponseModalities { get; set; }
+
+    /// <summary>Google Gemini image size. Valid values: 1K, 2K.</summary>
+    [Newtonsoft.Json.JsonProperty("google_gemini_image_size")]
+    public string? GoogleGeminiImageSize { get; set; }
+
+    /// <summary>Google Gemini aspect ratio. Valid values: 1:1, 3:4, 4:3, 9:16, 16:9.</summary>
+    [Newtonsoft.Json.JsonProperty("google_gemini_aspect_ratio")]
+    public string? GoogleGeminiAspectRatio { get; set; }
+
+    /// <summary>Google Imagen number of images to generate. Valid range: 1-4.</summary>
+    [Newtonsoft.Json.JsonProperty("google_imagen_num_images")]
+    public int? GoogleImagenNumImages { get; set; }
+
+    /// <summary>Google Imagen image size. Valid values: 1K, 2K (not available for Fast model).</summary>
+    [Newtonsoft.Json.JsonProperty("google_imagen_size")]
+    public string? GoogleImagenSize { get; set; }
+
+    /// <summary>Google Imagen aspect ratio. Valid values: 1:1, 3:4, 4:3, 9:16, 16:9.</summary>
+    [Newtonsoft.Json.JsonProperty("google_imagen_aspect_ratio")]
+    public string? GoogleImagenAspectRatio { get; set; }
+
+    /// <summary>Google Imagen person generation mode. Valid values: dont_allow, allow_adult, allow_all.</summary>
+    [Newtonsoft.Json.JsonProperty("google_imagen_person_generation")]
+    public string? GoogleImagenPersonGeneration { get; set; }
+
+    /// <summary>Google Imagen negative prompt - description of what to exclude from the image.</summary>
+    [Newtonsoft.Json.JsonProperty("google_imagen_negative_prompt")]
+    public string? GoogleImagenNegativePrompt { get; set; }
+    #endregion
 }
 
 /// <summary>Represents a LoRA (Low-Rank Adaptation) model to apply during generation.</summary>
