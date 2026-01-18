@@ -36,7 +36,7 @@ namespace SwarmUI.ApiClient.Tests.Http
                 LastRequest = request;
                 CallCount++;
 
-                if (request.Content != null)
+                if (request.Content is not null)
                 {
                     LastContent = await request.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
                 }
@@ -45,7 +45,7 @@ namespace SwarmUI.ApiClient.Tests.Http
                     LastContent = null;
                 }
 
-                if (CallCount == 2 && SecondResponseToReturn != null)
+                if (CallCount == 2 && SecondResponseToReturn is not null)
                 {
                     return SecondResponseToReturn;
                 }

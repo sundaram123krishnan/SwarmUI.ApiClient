@@ -80,10 +80,8 @@ public class SwarmClient : ISwarmClient
     }
 
     /// <summary>Creates a new SwarmClient using an injected HttpClient from dependency injection.</summary>
-    /// <param name="httpClient">
-    /// HTTP client injected from DI container. Should be configured by IHttpClientFactory.
-    /// Must not be null.
-    /// </param>
+    /// <param name="httpClient">HTTP client injected from DI container. Should be configured by IHttpClientFactory.
+    /// Must not be null.</param>
     /// <param name="options">Configuration options for the client. Must not be null.</param>
     /// <param name="logger">Optional logger for client operations. Uses NullLogger if null.</param>
     /// <remarks>Designed for DI scenarios where HttpClient is managed by IHttpClientFactory and the DI container. The client configures the injected HttpClient with SwarmUI-specific settings but does not dispose it. See the README and CodingGuidelines.md for registration patterns.</remarks>
@@ -123,11 +121,11 @@ public class SwarmClient : ISwarmClient
     /// <summary>Creates and configures an HttpClient for standalone usage.</summary>
     private static HttpClient CreateConfiguredHttpClient(SwarmClientOptions options, HttpMessageHandler? handler = null)
     {
-        if (options == null)
+        if (options is null)
         {
             throw new ArgumentNullException(nameof(options));
         }
-        HttpClient httpClient = handler != null ? new HttpClient(handler) : new HttpClient();
+        HttpClient httpClient = handler is not null ? new HttpClient(handler) : new HttpClient();
         httpClient.BaseAddress = new Uri(options.BaseUrl);
         httpClient.Timeout = options.HttpTimeout;
         ConfigureAuthorizationHeader(httpClient, options);
@@ -199,7 +197,7 @@ public class SwarmClient : ISwarmClient
             {
                 disposableSessionManager.Dispose();
             }
-            if (Internal.DisposeHttpClient && Internal.HttpClient != null)
+            if (Internal.DisposeHttpClient && Internal.HttpClient is not null)
             {
                 Internal.HttpClient.Dispose();
                 Internal.Logger.LogDebug("Disposed owned HttpClient");

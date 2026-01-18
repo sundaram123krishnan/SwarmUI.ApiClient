@@ -19,10 +19,8 @@ public interface ILLMEndpoint
     /// <param name="request">MagicPrompt request with text to enhance and model configuration.</param>
     /// <param name="cancellationToken">Cancellation token for the operation.</param>
     /// <returns>Enhanced text response from the LLM.</returns>
-    /// <remarks>
-    /// NOTE: This is a Hartsy-specific extension endpoint. Requires the Hartsy MagicPrompt extension
+    /// <remarks>NOTE: This is a Hartsy-specific extension endpoint. Requires the Hartsy MagicPrompt extension
     /// to be installed and configured in SwarmUI. This endpoint does not exist in standard SwarmUI.
-    /// The modelId must reference an LLM backend configured in SwarmUI settings.
-    /// </remarks>
+    /// The modelId must reference an LLM backend configured in SwarmUI settings.</remarks>
     Task<MagicPromptResponse> EnhancePromptAsync(MagicPromptRequest request, CancellationToken cancellationToken = default);
 }

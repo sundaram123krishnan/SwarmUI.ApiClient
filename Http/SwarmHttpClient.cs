@@ -117,7 +117,7 @@ public class SwarmHttpClient : ISwarmHttpClient
         try
         {
             TResponse? result = JsonConvert.DeserializeObject<TResponse>(responseText);
-            if (result == null)
+            if (result is null)
             {
                 throw new SwarmException($"API returned null response for endpoint {endpoint}");
             }

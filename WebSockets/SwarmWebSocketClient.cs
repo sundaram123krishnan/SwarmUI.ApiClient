@@ -45,10 +45,8 @@ public class SwarmWebSocketClient : ISwarmWebSocketClient
     /// <param name="options">Client configuration options. Must not be null.</param>
     /// <param name="sessionManager">Session manager for obtaining session IDs. Must not be null.</param>
     /// <param name="logger">Optional logger for WebSocket operations. Uses NullLogger if null.</param>
-    /// <remarks>
-    /// The WebSocket base URL is derived from options.BaseUrl by replacing http:// with ws://
-    /// and https:// with wss://. This ensures secure connections when the HTTP client uses HTTPS.
-    /// </remarks>
+    /// <remarks>The WebSocket base URL is derived from options.BaseUrl by replacing http:// with ws://
+    /// and https:// with wss://. This ensures secure connections when the HTTP client uses HTTPS.</remarks>
     public SwarmWebSocketClient(SwarmClientOptions options, ISessionManager sessionManager, ILogger<SwarmWebSocketClient>? logger = null)
     {
         Internal.Options = options ?? throw new ArgumentNullException(nameof(options));
@@ -193,7 +191,7 @@ public class SwarmWebSocketClient : ISwarmWebSocketClient
             {
                 Internal.Logger.LogDebug("Cleaning up WebSocket connection for {Endpoint}", endpoint);
                 await GracefulCloseAsync(webSocket, CancellationToken.None).ConfigureAwait(false);
-                if (sessionId != null)
+                if (sessionId is not null)
                 {
                     Internal.ActiveConnections.TryRemove(sessionId, out ClientWebSocket? _);
                 }

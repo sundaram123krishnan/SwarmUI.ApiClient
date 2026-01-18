@@ -15,7 +15,7 @@ namespace SwarmUI.ApiClient.Tests.IntegrationTests
         {
             UserSettingsResponse response = await Client.User.GetUserSettingsAsync(CancellationToken.None);
             Assert.NotNull(response);
-            if (response.Settings != null)
+            if (response.Settings is not null)
             {
                 Assert.IsAssignableFrom<System.Collections.Generic.Dictionary<string, object>>(response.Settings);
             }
@@ -26,7 +26,7 @@ namespace SwarmUI.ApiClient.Tests.IntegrationTests
         {
             UserSettingsResponse response = await Client.User.GetUserSettingsAsync(CancellationToken.None);
             Assert.NotNull(response);
-            if (response.Settings != null && response.Settings.Count > 0)
+            if (response.Settings is not null && response.Settings.Count > 0)
             {
                 foreach (System.Collections.Generic.KeyValuePair<string, object> setting in response.Settings)
                 {
@@ -75,7 +75,7 @@ namespace SwarmUI.ApiClient.Tests.IntegrationTests
 
             Assert.NotNull(response);
 
-            if (response.Settings != null)
+            if (response.Settings is not null)
             {
                 Assert.IsAssignableFrom<System.Collections.Generic.Dictionary<string, object>>(response.Settings);
 

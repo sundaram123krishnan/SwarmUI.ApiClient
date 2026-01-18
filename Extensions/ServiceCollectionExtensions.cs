@@ -27,7 +27,7 @@ public static class ServiceCollectionExtensions
         services.AddHttpClient<ISwarmClient, SwarmClient>((provider, httpClient) =>
         {
             SwarmClientOptions options = provider.GetRequiredService<SwarmClientOptions>();
-            if (httpClient.BaseAddress == null)
+            if (httpClient.BaseAddress is null)
             {
                 httpClient.BaseAddress = new Uri(options.BaseUrl);
             }

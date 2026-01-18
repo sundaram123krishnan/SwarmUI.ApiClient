@@ -41,10 +41,8 @@ public interface ISwarmClient : IAsyncDisposable
     IAdminEndpoint Admin { get; }
 
     /// <summary>Access to LLM endpoints for text processing and enhancement.</summary>
-    /// <remarks>
-    /// NOTE: LLM endpoints are Hartsy-specific extensions and not part of standard SwarmUI.
-    /// Provides access to language model features like MagicPrompt for text enhancement.
-    /// </remarks>
+    /// <remarks>NOTE: LLM endpoints are Hartsy-specific extensions and not part of standard SwarmUI.
+    /// Provides access to language model features like MagicPrompt for text enhancement.</remarks>
     ILLMEndpoint LLM { get; }
 
     /// <summary>Performs a health check on the SwarmUI server.</summary>

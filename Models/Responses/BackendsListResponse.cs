@@ -26,7 +26,7 @@ public class BackendsListResponse
     /// <remarks>Helper for working with flexible backend dictionaries. Returns the provided default when a key is missing or cannot be converted.</remarks>
     public static T GetBackendProperty<T>(Dictionary<string, object> backend, string key, T defaultValue)
     {
-        if (backend == null || !backend.TryGetValue(key, out object? value))
+        if (backend is null || !backend.TryGetValue(key, out object? value))
         {
             return defaultValue;
         }
@@ -36,7 +36,7 @@ public class BackendsListResponse
             {
                 return (T)(object)(value?.ToString() ?? string.Empty);
             }
-            if (typeof(T) == typeof(bool) && value != null)
+            if (typeof(T) == typeof(bool) && value is not null)
             {
                 if (bool.TryParse(value.ToString(), out bool boolValue))
                 {
@@ -47,7 +47,7 @@ public class BackendsListResponse
                     return (T)(object)(intValue != 0);
                 }
             }
-            if (typeof(T) == typeof(int) && value != null)
+            if (typeof(T) == typeof(int) && value is not null)
             {
                 if (int.TryParse(value.ToString(), out int intValue))
                 {

@@ -20,7 +20,7 @@ namespace SwarmUI.ApiClient.Tests.Sessions
 
             public FakeSwarmHttpClient(params string[] sessionIds)
             {
-                if (sessionIds == null || sessionIds.Length == 0)
+                if (sessionIds is null || sessionIds.Length == 0)
                 {
                     _sessionIds.Enqueue("session-1");
                 }

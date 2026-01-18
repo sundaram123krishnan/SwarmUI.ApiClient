@@ -51,7 +51,7 @@ public class PresetsEndpoint : IPresetsEndpoint
         {
             throw new ArgumentException("Preset title cannot be null or empty", nameof(request));
         }
-        if (request.Parameters == null)
+        if (request.Parameters is null)
         {
             throw new ArgumentException("Preset parameters cannot be null", nameof(request));
         }
@@ -78,10 +78,10 @@ public class PresetsEndpoint : IPresetsEndpoint
             payload["editing"] = request.EditingName;
         }
         JObject response = await Internal.HttpClient.PostJsonAsync<JObject>("AddNewPreset", payload, cancellationToken).ConfigureAwait(false);
-        if (response != null)
+        if (response is not null)
         {
             JToken? presetFailToken = response["preset_fail"];
-            if (presetFailToken != null && presetFailToken.Type != JTokenType.Null)
+            if (presetFailToken is not null && presetFailToken.Type != JTokenType.Null)
             {
                 string error = presetFailToken.ToString() ?? "Unknown error";
                 Internal.Logger.LogWarning("Failed to add or edit preset '{Title}': {Error}", request.Title, error);

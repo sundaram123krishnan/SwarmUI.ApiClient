@@ -25,7 +25,7 @@ namespace SwarmUI.ApiClient.Tests.IntegrationTests
             await _initLock.WaitAsync();
             try
             {
-                if (_cachedModelName != null)
+                if (_cachedModelName is not null)
                 {
                     return _cachedModelName;
                 }
@@ -39,7 +39,7 @@ namespace SwarmUI.ApiClient.Tests.IntegrationTests
 
                 ModelInfo? anyModel = fluxModel ?? models.Files.FirstOrDefault();
 
-                if (anyModel == null)
+                if (anyModel is null)
                 {
                     throw new InvalidOperationException("No models available on SwarmUI instance for testing");
                 }
@@ -60,7 +60,7 @@ namespace SwarmUI.ApiClient.Tests.IntegrationTests
             await _initLock.WaitAsync();
             try
             {
-                if (_cachedLoraName != null)
+                if (_cachedLoraName is not null)
                 {
                     return _cachedLoraName;
                 }
@@ -164,7 +164,7 @@ namespace SwarmUI.ApiClient.Tests.IntegrationTests
             {
                 updates.Add(update);
 
-                if (update.Type == "image" && update.Image != null)
+                if (update.Type == "image" && update.Image is not null)
                 {
                     batchIndices.Add(update.Image.BatchIndex);
                 }
@@ -181,7 +181,7 @@ namespace SwarmUI.ApiClient.Tests.IntegrationTests
             string model = await GetTestModelAsync();
             string? lora = await GetTestLoraAsync();
 
-            if (lora == null)
+            if (lora is null)
             {
                 return; // xUnit will mark as passed
             }

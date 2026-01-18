@@ -5,8 +5,7 @@ namespace SwarmUI.ApiClient.Exceptions;
 
 /// <summary>Exception thrown when a WebSocket operation fails.
 /// Provides additional context about the WebSocket state at the time of failure.</summary>
-/// <remarks>
-/// This exception is thrown for WebSocket specific errors:
+/// <remarks>This exception is thrown for WebSocket specific errors:
 /// - Connection failures
 /// - Send/receive errors
 /// - Unexpected disconnections
@@ -14,8 +13,7 @@ namespace SwarmUI.ApiClient.Exceptions;
 ///
 /// PROPERTIES:
 /// - LastState: The WebSocket state when the error occurred
-/// - Helps with debugging (was it Open? CloseSent? Aborted?)
-/// </remarks>
+/// - Helps with debugging (was it Open? CloseSent? Aborted?)</remarks>
 public class SwarmWebSocketException : SwarmException
 {
     /// <summary>Gets the WebSocket state at the time the error occurred, if available.</summary>

@@ -36,7 +36,7 @@ namespace SwarmUI.ApiClient.Tests.IntegrationTests
             try
             {
                 ServerStatusResponse status = await Client.Generation.GetCurrentStatusAsync(includeDebug: false);
-                if (status == null)
+                if (status is null)
                 {
                     throw new InvalidOperationException(
                         $"SwarmUI is not responding at {BaseUrl}. Please start SwarmUI before running integration tests.");
@@ -53,7 +53,7 @@ namespace SwarmUI.ApiClient.Tests.IntegrationTests
         /// <summary>Disposes the <see cref="SwarmClient"/> after integration tests complete.</summary>
         public async Task DisposeAsync()
         {
-            if (Client != null)
+            if (Client is not null)
             {
                 await Client.DisposeAsync();
             }

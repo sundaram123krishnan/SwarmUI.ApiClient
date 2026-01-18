@@ -11,12 +11,10 @@ using SwarmUI.ApiClient.Sessions;
 namespace SwarmUI.ApiClient.Endpoints.LLM;
 
 /// <summary>Implements LLM endpoints for text processing via SwarmUI.</summary>
-/// <remarks>
-/// NOTE: LLM endpoints are Hartsy-specific extensions and are not part of the standard SwarmUI distribution.
+/// <remarks>NOTE: LLM endpoints are Hartsy-specific extensions and are not part of the standard SwarmUI distribution.
 /// These endpoints require custom extensions to be installed and configured on the SwarmUI server.
 ///
-/// Provides access to LLM-based text enhancement features like MagicPrompt.
-/// </remarks>
+/// Provides access to LLM-based text enhancement features like MagicPrompt.</remarks>
 public class LLMEndpoint : ILLMEndpoint
 {
     /// <summary>Internal implementation data containing dependencies.</summary>
@@ -50,15 +48,12 @@ public class LLMEndpoint : ILLMEndpoint
     /// <param name="request">MagicPrompt request with text to enhance and model configuration.</param>
     /// <param name="cancellationToken">Cancellation token for the operation.</param>
     /// <returns>Enhanced text response from the LLM.</returns>
-    /// <remarks>
-    /// NOTE: This is a Hartsy-specific extension endpoint. Calls the LLMAPICalls.MagicPromptPhoneHome
+    /// <remarks>NOTE: This is a Hartsy-specific extension endpoint. Calls the LLMAPICalls.MagicPromptPhoneHome
     /// endpoint in SwarmUI, which requires the Hartsy MagicPrompt extension to be installed and configured.
-    /// This endpoint does not exist in standard SwarmUI.
-    /// </remarks>
+    /// This endpoint does not exist in standard SwarmUI.</remarks>
     public async Task<MagicPromptResponse> EnhancePromptAsync(MagicPromptRequest request, CancellationToken cancellationToken = default)
     {
         ArgumentNullException.ThrowIfNull(request);
-
         if (string.IsNullOrWhiteSpace(request.Content?.Text))
         {
             throw new ArgumentException("Text content cannot be empty", nameof(request));

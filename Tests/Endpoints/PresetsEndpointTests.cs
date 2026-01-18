@@ -23,7 +23,7 @@ namespace SwarmUI.ApiClient.Tests.Endpoints
             public Task<TResponse> PostJsonAsync<TResponse>(string endpoint, object? payload = null, CancellationToken cancellationToken = default) where TResponse : class
             {
                 LastEndpoint = endpoint;
-                LastPayload = payload as JObject ?? (payload != null ? JObject.FromObject(payload) : new JObject());
+                LastPayload = payload as JObject ?? (payload is not null ? JObject.FromObject(payload) : new JObject());
                 if (typeof(TResponse) == typeof(JObject))
                 {
                     return Task.FromResult((TResponse)(object)ResponseToReturn);

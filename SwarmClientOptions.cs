@@ -10,7 +10,7 @@ public class SwarmClientOptions
     public string AuthorizationHeaderName { get; set; } = "Authorization";
 
     /// <summary>Base URL of the SwarmUI server instance.</summary>
-    /// <remarks>Example: "http://localhost:7801" or "https://hartsy.ai". This should NOT include the /API/ path - that will be appended automatically.</remarks>
+    /// <remarks>Example: "http://localhost:7801". This should NOT include the /API/ path - that will be appended automatically.</remarks>
     public string BaseUrl { get; set; } = "http://localhost:7801";
 
     /// <summary>Optional authorization header value for authenticated requests.</summary>

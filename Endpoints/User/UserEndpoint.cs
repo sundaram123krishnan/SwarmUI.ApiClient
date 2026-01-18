@@ -50,14 +50,12 @@ public class UserEndpoint : IUserEndpoint
     {
         Internal.Logger.LogDebug("Fetching user data including presets");
         UserDataResponse response = await Internal.HttpClient.PostJsonAsync<UserDataResponse>("GetMyUserData", payload: null, cancellationToken).ConfigureAwait(false);
-
         // Get preset count - Presets can be array, dictionary, or null depending on server version
         int presetCount = 0;
         if (response.Presets is System.Collections.ICollection collection)
         {
             presetCount = collection.Count;
         }
-
         Internal.Logger.LogInformation("Retrieved user data with {PresetCount} presets", presetCount);
         return response;
     }
@@ -75,18 +73,16 @@ public class UserEndpoint : IUserEndpoint
     }
 
     /// <summary>Updates user settings with new values; only provided keys are changed.</summary>
-    /// <param name="settings">
-    /// Dictionary of setting keys and their new values.
+    /// <param name="settings">Dictionary of setting keys and their new values.
     /// Only include settings you want to change, not all settings.
-    /// Must not be null or empty.
-    /// </param>
+    /// Must not be null or empty.</param>
     /// <param name="cancellationToken">Cancellation token for the operation.</param>
     /// <exception cref="ArgumentNullException">Thrown if settings is null.</exception>
     /// <exception cref="ArgumentException">Thrown if settings dictionary is empty.</exception>
     /// <remarks>Performs a partial update: only the provided settings are modified, and others remain unchanged. Setting values are validated by SwarmUI; invalid names or values may be rejected. See the SwarmUI documentation for valid setting keys.</remarks>
     public async Task ChangeUserSettingsAsync(Dictionary<string, object> settings, CancellationToken cancellationToken = default)
     {
-        if (settings == null)
+        if (settings is null)
         {
             throw new ArgumentNullException(nameof(settings));
         }
@@ -104,15 +100,11 @@ public class UserEndpoint : IUserEndpoint
     }
 
     /// <summary>Gets the status of a specific external service API key.</summary>
-    /// <param name="keyType">
-    /// Type of API key to check (e.g., "stability_api", "openai_api").
-    /// Must match a key type recognized by SwarmUI. Must not be null or empty.
-    /// </param>
+    /// <param name="keyType">Type of API key to check (e.g., "stability_api", "openai_api").
+    /// Must match a key type recognized by SwarmUI. Must not be null or empty.</param>
     /// <param name="cancellationToken">Cancellation token for the operation.</param>
-    /// <returns>
-    /// JSON object containing key status information.
-    /// Typical fields: "status" ("valid", "invalid", "missing"), "message" (details).
-    /// </returns>
+    /// <returns>JSON object containing key status information.
+    /// Typical fields: "status" ("valid", "invalid", "missing"), "message" (details).</returns>
     /// <exception cref="ArgumentException">Thrown if keyType is null or empty.</exception>
     /// <remarks>Checks whether an external API key is configured and, for some key types, whether it is valid. Typical status values include "valid", "invalid", and "missing". See the SwarmUI documentation for supported key types and status fields.</remarks>
     public async Task<JObject> GetAPIKeyStatusAsync(string keyType, CancellationToken cancellationToken = default)
@@ -133,14 +125,10 @@ public class UserEndpoint : IUserEndpoint
     }
 
     /// <summary>Sets or updates an external service API key for the current user.</summary>
-    /// <param name="keyType">
-    /// Type of API key to set (e.g., "stability_api", "openai_api").
-    /// Must match a key type recognized by SwarmUI. Must not be null or empty.
-    /// </param>
-    /// <param name="key">
-    /// The API key value to set. Pass "none" or empty string to unset/remove the key.
-    /// Must not be null (use "none" to remove).
-    /// </param>
+    /// <param name="keyType">Type of API key to set (e.g., "stability_api", "openai_api").
+    /// Must match a key type recognized by SwarmUI. Must not be null or empty.</param>
+    /// <param name="key">The API key value to set. Pass "none" or empty string to unset/remove the key.
+    /// Must not be null (use "none" to remove).</param>
     /// <param name="cancellationToken">Cancellation token for the operation.</param>
     /// <exception cref="ArgumentException">Thrown if keyType is null or empty.</exception>
     /// <exception cref="ArgumentNullException">Thrown if key is null.</exception>

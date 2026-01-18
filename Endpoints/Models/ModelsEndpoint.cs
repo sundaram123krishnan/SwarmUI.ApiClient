@@ -69,8 +69,8 @@ public class ModelsEndpoint : IModelsEndpoint
                 sortReverse
             },
             cancellationToken).ConfigureAwait(false);
-        int folderCount = response.Folders != null ? response.Folders.Count : 0;
-        int fileCount = response.Files != null ? response.Files.Count : 0;
+        int folderCount = response.Folders is not null ? response.Folders.Count : 0;
+        int fileCount = response.Files is not null ? response.Files.Count : 0;
         Internal.Logger.LogInformation("Retrieved {FolderCount} folders and {FileCount} models for type '{ModelType}' at path '{Path}'",
             folderCount, fileCount, modelType, path);
         return response;
@@ -92,10 +92,10 @@ public class ModelsEndpoint : IModelsEndpoint
             },
             cancellationToken).ConfigureAwait(false);
         ModelDescription? description = null;
-        if (response != null)
+        if (response is not null)
         {
             JToken? modelToken = response["model"];
-            if (modelToken != null && modelToken.Type != JTokenType.Null)
+            if (modelToken is not null && modelToken.Type != JTokenType.Null)
             {
                 description = modelToken.ToObject<ModelDescription>();
             }
@@ -104,7 +104,7 @@ public class ModelsEndpoint : IModelsEndpoint
                 description = response.ToObject<ModelDescription>();
             }
         }
-        if (description == null)
+        if (description is null)
         {
             ModelDescription fallback = new()
             {
@@ -124,7 +124,6 @@ public class ModelsEndpoint : IModelsEndpoint
             throw new ArgumentException("Model name cannot be null or empty", nameof(modelName));
         }
         Internal.Logger.LogDebug("Deleting model '{ModelName}' of type '{ModelType}'", modelName, modelType);
-
         JObject _ = await Internal.HttpClient.PostJsonAsync<JObject>("DeleteModel",
             new
             {
@@ -300,7 +299,7 @@ public class ModelsEndpoint : IModelsEndpoint
         await foreach (ModelOperationUpdate update in Internal.WebSocketClient.StreamMessagesAsync<ModelOperationUpdate>("SelectModelWS",
             payload, ParseModelOperationMessage, cancellationToken))
         {
-            if (update != null)
+            if (update is not null)
             {
                 yield return update;
             }

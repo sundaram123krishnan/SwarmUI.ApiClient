@@ -35,7 +35,7 @@ public class UserSettingsResponse
             {
                 return (T)(object)(value?.ToString() ?? string.Empty);
             }
-            if (typeof(T) == typeof(int) && value != null)
+            if (typeof(T) == typeof(int) && value is not null)
             {
                 if (int.TryParse(value.ToString(), out int intValue))
                 {
@@ -50,7 +50,7 @@ public class UserSettingsResponse
                     return (T)(object)(int)doubleValue;
                 }
             }
-            if (typeof(T) == typeof(float) && value != null)
+            if (typeof(T) == typeof(float) && value is not null)
             {
                 if (float.TryParse(value.ToString(), out float floatValue))
                 {
@@ -61,7 +61,7 @@ public class UserSettingsResponse
                     return (T)(object)(float)doubleValue;
                 }
             }
-            if (typeof(T) == typeof(bool) && value != null)
+            if (typeof(T) == typeof(bool) && value is not null)
             {
                 if (bool.TryParse(value.ToString(), out bool boolValue))
                 {

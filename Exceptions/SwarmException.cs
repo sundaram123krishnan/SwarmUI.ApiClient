@@ -4,8 +4,7 @@ namespace SwarmUI.ApiClient.Exceptions;
 
 /// <summary>Base exception for all SwarmUI client errors.
 /// Provides additional context about SwarmUI-specific error conditions.</summary>
-/// <remarks>
-/// This is the base exception class for the library.
+/// <remarks>This is the base exception class for the library.
 ///
 /// USAGE PATTERN:
 /// - Throw specific derived exceptions (SwarmSessionException, SwarmWebSocketException, etc.)
@@ -33,13 +32,11 @@ namespace SwarmUI.ApiClient.Exceptions;
 /// {
 ///     // Handle any other SwarmUI error
 ///     Console.WriteLine($"SwarmUI error ({ex.ErrorId}): {ex.Message}");
-/// }
-/// </remarks>
+/// }</remarks>
 public class SwarmException : Exception
 {
     /// <summary>Gets the error identifier from SwarmUI, if available.
-    /// Common values: "invalid_session_id", "authentication_failed", etc.
-    /// </summary>
+    /// Common values: "invalid_session_id", "authentication_failed", etc.</summary>
     public string? ErrorId { get; }
 
     /// <summary>Initializes a new instance of the SwarmException class.</summary>

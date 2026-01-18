@@ -3,11 +3,9 @@ using Newtonsoft.Json;
 namespace SwarmUI.ApiClient.Models.Requests;
 
 /// <summary>Request model for MagicPrompt text enhancement via LLM.</summary>
-/// <remarks>
-/// NOTE: This is a Hartsy-specific extension endpoint. The MagicPrompt functionality is not part
+/// <remarks>NOTE: This is a Hartsy-specific extension endpoint. The MagicPrompt functionality is not part
 /// of the standard SwarmUI distribution and requires the Hartsy MagicPrompt extension to be installed
-/// and configured on the SwarmUI server. Without this extension, calls to this endpoint will fail.
-/// </remarks>
+/// and configured on the SwarmUI server. Without this extension, calls to this endpoint will fail.</remarks>
 public class MagicPromptRequest
 {
     /// <summary>The text content to enhance via MagicPrompt.</summary>

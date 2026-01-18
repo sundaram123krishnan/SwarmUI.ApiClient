@@ -27,7 +27,7 @@ namespace SwarmUI.ApiClient.Tests.IntegrationTests
         {
             BackendsListResponse response = await Client.Backends.ListBackendsAsync(CancellationToken.None);
 
-            if (response.Backends != null && response.Backends.Count > 0)
+            if (response.Backends is not null && response.Backends.Count > 0)
             {
                 foreach (Dictionary<string, object> backend in response.Backends)
                 {
@@ -75,7 +75,7 @@ namespace SwarmUI.ApiClient.Tests.IntegrationTests
             Assert.NotNull(response);
             Assert.NotNull(response.Backends);
             Assert.IsAssignableFrom<List<Dictionary<string, object>>>(response.Backends);
-            if (response.Backends != null)
+            if (response.Backends is not null)
             {
                 foreach (Dictionary<string, object> backend in response.Backends)
                 {
@@ -91,7 +91,7 @@ namespace SwarmUI.ApiClient.Tests.IntegrationTests
             BackendsListResponse response = await Client.Backends.ListBackendsAsync(CancellationToken.None);
 
             // Assert
-            if (response.Backends != null && response.Backends.Count > 0)
+            if (response.Backends is not null && response.Backends.Count > 0)
             {
                 foreach (Dictionary<string, object> backend in response.Backends)
                 {
