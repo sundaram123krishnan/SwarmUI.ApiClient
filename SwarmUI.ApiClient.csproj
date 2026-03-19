@@ -15,8 +15,8 @@
     <PackageTags>swarmui;stable diffusion;image generation;ai;api client</PackageTags>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <PackageProjectUrl>https://github.com/HartsyAI/HartsyWeb</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/HartsyAI/HartsyWeb</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/kalebbroo/SwarmUI.ApiClient</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/kalebbroo/SwarmUI.ApiClient</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <NoWarn>$(NoWarn);1591</NoWarn>
