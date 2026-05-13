@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging.Abstractions;
 using Newtonsoft.Json.Linq;
 using SwarmUI.ApiClient.Http;
 using SwarmUI.ApiClient.Models.Common;
+using SwarmUI.ApiClient.Models.Enums;
 using SwarmUI.ApiClient.Models.Requests;
 using SwarmUI.ApiClient.Models.Responses;
 using SwarmUI.ApiClient.Sessions;
@@ -283,6 +284,11 @@ public class ModelsEndpoint : IModelsEndpoint
             }
         }
     }
+
+    /// <inheritdoc />
+    public IAsyncEnumerable<ModelOperationUpdate> StreamModelDownloadAsync(string url, SwarmSubType subType, string name, string? metadata = null,
+        CancellationToken cancellationToken = default)
+        => StreamModelDownloadAsync(url, subType.AsApiType(), name, metadata, cancellationToken);
 
     /// <inheritdoc />
     public async IAsyncEnumerable<ModelOperationUpdate> StreamModelSelectionAsync(string model, [EnumeratorCancellation] CancellationToken cancellationToken = default)

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using SwarmUI.ApiClient.Models.Common;
+using SwarmUI.ApiClient.Models.Enums;
 using SwarmUI.ApiClient.Models.Requests;
 using SwarmUI.ApiClient.Models.Responses;
 
@@ -95,6 +96,16 @@ public interface IModelsEndpoint
     /// <param name="cancellationToken">Cancellation token that cancels the streaming operation.</param>
     /// <returns>Async stream of <see cref="ModelOperationUpdate"/> messages describing progress and status.</returns>
     IAsyncEnumerable<ModelOperationUpdate> StreamModelDownloadAsync(string url, string modelType, string name, string? metadata = null,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>Strongly-typed overload of <see cref="StreamModelDownloadAsync(string, string, string, string, CancellationToken)"/> that accepts a <see cref="SwarmSubType"/> enum value to eliminate sub-type string typos.</summary>
+    /// <param name="url">The URL to download the model from.</param>
+    /// <param name="subType">Model sub-type as a strongly-typed enum value; converted to SwarmUI's expected API string via <see cref="SwarmSubTypeExtensions.AsApiType"/>.</param>
+    /// <param name="name">Filename (or relative filepath under the sub-type folder) to use for the downloaded model.</param>
+    /// <param name="metadata">Optional raw JSON metadata text to inject into the model.</param>
+    /// <param name="cancellationToken">Cancellation token that cancels the streaming operation.</param>
+    /// <returns>Async stream of <see cref="ModelOperationUpdate"/> messages describing progress and status.</returns>
+    IAsyncEnumerable<ModelOperationUpdate> StreamModelDownloadAsync(string url, SwarmSubType subType, string name, string? metadata = null,
         CancellationToken cancellationToken = default);
 
     /// <summary>Streams live status updates while loading a model using the <c>SelectModelWS</c> WebSocket API.</summary>

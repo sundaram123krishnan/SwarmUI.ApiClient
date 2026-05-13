@@ -7,6 +7,7 @@ using Newtonsoft.Json.Linq;
 using SwarmUI.ApiClient.Endpoints.Models;
 using SwarmUI.ApiClient.Http;
 using SwarmUI.ApiClient.Models.Common;
+using SwarmUI.ApiClient.Models.Enums;
 using SwarmUI.ApiClient.Models.Requests;
 using SwarmUI.ApiClient.Models.Responses;
 using SwarmUI.ApiClient.Sessions;
@@ -179,6 +180,32 @@ namespace SwarmUI.ApiClient.Tests.Endpoints
             Assert.Equal(0.5, updates[0].Progress);
             Assert.Equal("complete", updates[1].Status);
             Assert.Equal(1.0, updates[1].Progress);
+        }
+
+        [Fact]
+        public async Task StreamModelDownloadAsync_TypedOverload_ConvertsSubTypeEnumToApiString()
+        {
+            RecordingHttpClient httpClient = new RecordingHttpClient();
+            FakeWebSocketClient webSocketClient = new FakeWebSocketClient();
+            DummySessionManager sessionManager = new DummySessionManager();
+            ModelsEndpoint endpoint = new ModelsEndpoint(httpClient, webSocketClient, sessionManager, logger: null);
+
+            webSocketClient.MessagesToStream.Add(new JObject { ["status"] = "complete", ["progress"] = 1.0 });
+
+            await foreach (ModelOperationUpdate _ in endpoint.StreamModelDownloadAsync(
+                url: "https://example.com/lora.safetensors",
+                subType: SwarmSubType.LoRA,
+                name: "BFL/Flux1/example.safetensors",
+                metadata: null,
+                cancellationToken: CancellationToken.None))
+            {
+            }
+
+            Assert.Equal("DoModelDownloadWS", webSocketClient.LastEndpoint);
+            Assert.NotNull(webSocketClient.LastPayload);
+            Assert.Equal("LoRA", webSocketClient.LastPayload!["type"]?.ToString());
+            Assert.Equal("https://example.com/lora.safetensors", webSocketClient.LastPayload!["url"]?.ToString());
+            Assert.Equal("BFL/Flux1/example.safetensors", webSocketClient.LastPayload!["name"]?.ToString());
         }
 
         [Fact]
